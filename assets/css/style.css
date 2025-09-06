@@ -7867,14 +7867,6 @@ ul.image-gallery li:before,
   padding: 10px;
 }
 
-/* style.css */
-.fitness-studio-img figure img {
-  width: 100%;              /* ensures responsiveness */
-  max-width: 553px;         /* matches Unsplash width */
-  height: 469px;            /* fixed height for uniform look */
-  object-fit: cover;        /* crops without distortion */
-  border-radius: 8px;       /* optional: keeps images consistent */
-}
 
 .blog-style-two .blog-item figure img {
   width: 100%;           /* take full container width */
@@ -7882,4 +7874,32 @@ ul.image-gallery li:before,
   object-fit: cover;     /* crop instead of stretching */
   display: block;        /* remove inline image spacing */
 }
+
+
+
+
+.fitness-studio-img figure {
+  width: 100%;
+  height: 469px;            /* same visual box height */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.fitness-studio-img figure img {
+  width: 100%;              /* allow upscaling to fill the width */
+  height: 100%;             /* allow upscaling to fill the height */
+  object-fit: contain;      /* preserves whole image, centered */
+  display: block;
+}
+
+
+
+
+
+
 
