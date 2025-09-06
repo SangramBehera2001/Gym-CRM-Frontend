@@ -7849,5 +7849,37 @@ ul.image-gallery li:before,
 
 
 
+.group-training {
+    margin-top: 50px; /* Adjust this value as needed */
+}
 
+.group-training-text {
+  height: 480px; /* force equal height */
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px; /* optional, makes it look cleaner */
+}
+
+.group-training .row {
+  margin: 0 -10px; /* adjust spacing */
+}
+.group-training .col-lg-4 {
+  padding: 10px;
+}
+
+/* style.css */
+.fitness-studio-img figure img {
+  width: 100%;              /* ensures responsiveness */
+  max-width: 553px;         /* matches Unsplash width */
+  height: 469px;            /* fixed height for uniform look */
+  object-fit: cover;        /* crops without distortion */
+  border-radius: 8px;       /* optional: keeps images consistent */
+}
+
+.blog-style-two .blog-item figure img {
+  width: 100%;           /* take full container width */
+  height: 266px;         /* match Unsplash height */
+  object-fit: cover;     /* crop instead of stretching */
+  display: block;        /* remove inline image spacing */
+}
 

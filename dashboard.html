@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>GYM ADMIN</h2>
+        </div>
+        <div class="menu">
+            <div class="menu-item active" data-section="dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="menu-item" data-section="members">
+                <i class="fas fa-users"></i>
+                <span>Members</span>
+            </div>
+            <div class="menu-item" data-section="payments">
+                <i class="fas fa-credit-card"></i>
+                <span>Payments</span>
+            </div>
+            <div class="menu-item" data-section="trainers">
+                <i class="fas fa-dumbbell"></i>
+                <span>Trainers</span>
+            </div>
+            <div class="menu-item" data-section="support">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </div>
+            <div class="menu-item" data-section="reports">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reports</span>
+            </div>
+            <div class="menu-item" data-section="settings">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="header">
+            <h1 id="section-title">Dashboard</h1>
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=Gym+Owner&background=3498db&color=fff" alt="User">
+                <div>
+                    <h4>Gym Owner</h4>
+                    <p>Admin</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section active">
+            <!-- Stats Cards -->
+            <div class="dashboard-cards">
+                <div class="card stat-card">
+                    <div class="stat-icon" style="background: #e6f7ee; color: #2ecc71;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-text">
+                        <h3>0</h3>
+                        <p>Total Members</p>
+                    </div>
+                </div>
+                
+                <div class="card stat-card">
+                    <div class="stat-icon" style="background: #fef5e7; color: #f39c12;">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="stat-text">
+                        <h3>0</h3>
+                        <p>Renewals Due</p>
+                    </div>
+                </div>
+                
+                <div class="card stat-card">
+                    <div class="stat-icon" style="background: #e6f0ff; color: #3498db;">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="stat-text">
+                        <h3>0</h3>
+                        <p>Revenue This Month</p>
+                    </div>
+                </div>
+                
+                <div class="card stat-card">
+                    <div class="stat-icon" style="background: #fde9e7; color: #e74c3c;">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                    </div>
+                    <div class="stat-text">
+                        <h3>0</h3>
+                        <p>Payments Overdue</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts">
+                <div class="chart-container">
+                    <h3 class="chart-title">Membership Growth</h3>
+                    <canvas id="membersChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title">Revenue Trend</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Payments Table -->
+            <div class="table-container">
+                <h3 class="chart-title">Recent Payments</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Plan</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>12 Oct 2023</td>
+                            <td>$99.00</td>
+                            <td>Monthly</td>
+                            <td><span class="status status-paid">Paid</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Smith</td>
+                            <td>11 Oct 2023</td>
+                            <td>$250.00</td>
+                            <td>Quarterly</td>
+                            <td><span class="status status-paid">Paid</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mike Johnson</td>
+                            <td>10 Oct 2023</td>
+                            <td>$99.00</td>
+                            <td>Monthly</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Members Section -->
+        <div id="members" class="section">
+            <div class="tabs">
+                <div class="tab active" data-tab="view-members">View Members</div>
+                <div class="tab" data-tab="add-member">Add Member</div>
+            </div>
+            
+            <div id="view-members" class="tab-content">
+                <div class="table-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>All Members</h3>
+                        <div>
+                            <input type="text" placeholder="Search members..." style="padding: 8px 15px; border: 1px solid #ddd; border-radius: 4px; width: 250px;">
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Phone</th>
+                                <th>Plan</th>
+                                <th>Join Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>28</td>
+                                <td>Male</td>
+                                <td>+1 234-567-8901</td>
+                                <td>Monthly</td>
+                                <td>12 Oct 2023</td>
+                                <td><span class="status status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Smith</td>
+                                <td>32</td>
+                                <td>Female</td>
+                                <td>+1 345-678-9012</td>
+                                <td>Quarterly</td>
+                                <td>11 Oct 2023</td>
+                                <td><span class="status status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mike Johnson</td>
+                                <td>45</td>
+                                <td>Male</td>
+                                <td>+1 456-789-0123</td>
+                                <td>Monthly</td>
+                                <td>10 Oct 2023</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="add-member" class="tab-content" style="display: none;">
+                <div class="form-container">
+                    <h3 style="margin-bottom: 20px;">Add New Member</h3>
+                    <form id="member-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="plan">Membership Plan</label>
+                                <select id="plan" required>
+                                    <option value="">Select Plan</option>
+                                    <option value="monthly">Monthly ($99)</option>
+                                    <option value="quarterly">Quarterly ($250)</option>
+                                    <option value="yearly">Yearly ($800)</option>
+                                    <option value="premium">Premium ($1200)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="trainer">Trainer Assigned</label>
+                                <select id="trainer">
+                                    <option value="">Select Trainer</option>
+                                    <option value="trainer1">Michael Roberts</option>
+                                    <option value="trainer2">Sarah Johnson</option>
+                                    <option value="trainer3">David Wilson</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="join-date">Join Date</label>
+                                <input type="date" id="join-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="renewal-date">Renewal Date</label>
+                                <input type="date" id="renewal-date">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Add Member</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payments Section -->
+        <div id="payments" class="section">
+            <div class="tabs">
+                <div class="tab active" data-tab="view-payments">Payment Records</div>
+                <div class="tab" data-tab="membership-plans">Membership Plans</div>
+                <div class="tab" data-tab="renewals">Renewal Reminders</div>
+            </div>
+            
+            <div id="view-payments" class="tab-content">
+                <div class="table-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Payment History</h3>
+                        <div>
+                            <select style="padding: 8px 15px; border: 1px solid #ddd; border-radius: 4px; margin-right: 10px;">
+                                <option>All Status</option>
+                                <option>Paid</option>
+                                <option>Pending</option>
+                                <option>Overdue</option>
+                            </select>
+                            <button class="btn btn-primary">Generate Report</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Invoice ID</th>
+                                <th>Member</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Plan</th>
+                                <th>Payment Method</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#INV-001</td>
+                                <td>John Doe</td>
+                                <td>12 Oct 2023</td>
+                                <td>$99.00</td>
+                                <td>Monthly</td>
+                                <td>Credit Card</td>
+                                <td><span class="status status-paid">Paid</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;"><i class="fas fa-download"></i> Invoice</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#INV-002</td>
+                                <td>Sarah Smith</td>
+                                <td>11 Oct 2023</td>
+                                <td>$250.00</td>
+                                <td>Quarterly</td>
+                                <td>PayPal</td>
+                                <td><span class="status status-paid">Paid</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;"><i class="fas fa-download"></i> Invoice</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#INV-003</td>
+                                <td>Mike Johnson</td>
+                                <td>10 Oct 2023</td>
+                                <td>$99.00</td>
+                                <td>Monthly</td>
+                                <td>Bank Transfer</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;"><i class="fas fa-download"></i> Invoice</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="membership-plans" class="tab-content" style="display: none;">
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h3 style="margin-bottom: 15px;">Monthly Plan</h3>
+                        <div style="font-size: 24px; font-weight: bold; color: var(--secondary); margin-bottom: 10px;">$99/month</div>
+                        <ul style="list-style-type: none; margin-bottom: 20px;">
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Access to all equipment</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Free fitness assessment</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Group classes</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-times" style="color: var(--danger); margin-right: 10px;"></i> Personal trainer sessions</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Edit Plan</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 style="margin-bottom: 15px;">Quarterly Plan</h3>
+                        <div style="font-size: 24px; font-weight: bold; color: var(--secondary); margin-bottom: 10px;">$250/3 months</div>
+                        <ul style="list-style-type: none; margin-bottom: 20px;">
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Access to all equipment</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Free fitness assessment</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Group classes</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> 2 Personal trainer sessions</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Edit Plan</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 style="margin-bottom: 15px;">Yearly Plan</h3>
+                        <div style="font-size: 24px; font-weight: bold; color: var(--secondary); margin-bottom: 10px;">$800/year</div>
+                        <ul style="list-style-type: none; margin-bottom: 20px;">
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Access to all equipment</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Free fitness assessment</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> All group classes</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> 12 Personal trainer sessions</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Edit Plan</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 style="margin-bottom: 15px;">Premium Plan</h3>
+                        <div style="font-size: 24px; font-weight: bold; color: var(--secondary); margin-bottom: 10px;">$1200/year</div>
+                        <ul style="list-style-type: none; margin-bottom: 20px;">
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Access to all equipment</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Free fitness assessment</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> All group classes</li>
+                            <li style="padding: 5px 0;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i> Unlimited trainer sessions</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Edit Plan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="renewals" class="tab-content" style="display: none;">
+                <div class="table-container">
+                    <h3 style="margin-bottom: 20px;">Renewal Reminders</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Member</th>
+                                <th>Plan</th>
+                                <th>Renewal Date</th>
+                                <th>Contact</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>Monthly</td>
+                                <td>12 Nov 2023</td>
+                                <td>+1 234-567-8901</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-envelope"></i> Email</button>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;"><i class="fas fa-sms"></i> SMS</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Smith</td>
+                                <td>Quarterly</td>
+                                <td>11 Jan 2024</td>
+                                <td>+1 345-678-9012</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-envelope"></i> Email</button>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;"><i class="fas fa-sms"></i> SMS</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mike Johnson</td>
+                                <td>Monthly</td>
+                                <td>10 Nov 2023</td>
+                                <td>+1 456-789-0123</td>
+                                <td><span class="status status-overdue">Overdue</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-envelope"></i> Email</button>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;"><i class="fas fa-sms"></i> SMS</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trainers Section -->
+        <div id="trainers" class="section">
+            <div class="tabs">
+                <div class="tab active" data-tab="view-trainers">View Trainers</div>
+                <div class="tab" data-tab="add-trainer">Add Trainer</div>
+                <div class="tab" data-tab="trainer-assignments">Assignments</div>
+            </div>
+            
+            <div id="view-trainers" class="tab-content">
+                <div class="table-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>All Trainers</h3>
+                        <div>
+                            <input type="text" placeholder="Search trainers..." style="padding: 8px 15px; border: 1px solid #ddd; border-radius: 4px; width: 250px;">
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Specialization</th>
+                                <th>Contact</th>
+                                <th>Salary</th>
+                                <th>Members Assigned</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Michael Roberts</td>
+                                <td>Strength Training</td>
+                                <td>+1 555-123-4567</td>
+                                <td>$3,500</td>
+                                <td>15</td>
+                                <td><span class="status status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td>Yoga & Flexibility</td>
+                                <td>+1 555-234-5678</td>
+                                <td>$3,200</td>
+                                <td>12</td>
+                                <td><span class="status status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>David Wilson</td>
+                                <td>Cardio & Weight Loss</td>
+                                <td>+1 555-345-6789</td>
+                                <td>$3,800</td>
+                                <td>18</td>
+                                <td><span class="status status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="add-trainer" class="tab-content" style="display: none;">
+                <div class="form-container">
+                    <h3 style="margin-bottom: 20px;">Add New Trainer</h3>
+                    <form id="trainer-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="trainer-name">Full Name</label>
+                                <input type="text" id="trainer-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="trainer-specialization">Specialization</label>
+                                <input type="text" id="trainer-specialization" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="trainer-phone">Phone Number</label>
+                                <input type="tel" id="trainer-phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="trainer-email">Email Address</label>
+                                <input type="email" id="trainer-email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="trainer-salary">Salary</label>
+                                <input type="number" id="trainer-salary" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="trainer-status">Status</label>
+                                <select id="trainer-status" required>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Add Trainer</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div id="trainer-assignments" class="tab-content" style="display: none;">
+                <div class="table-container">
+                    <h3 style="margin-bottom: 20px;">Trainer Assignments</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Trainer</th>
+                                <th>Specialization</th>
+                                <th>Assigned Members</th>
+                                <th>Performance</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Michael Roberts</td>
+                                <td>Strength Training</td>
+                                <td>15</td>
+                                <td>
+                                    <div style="background: #f0f0f0; border-radius: 5px; height: 10px; width: 100%;">
+                                        <div style="background: var(--success); height: 100%; width: 85%; border-radius: 5px;"></div>
+                                    </div>
+                                    <small>85%</small>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td>Yoga & Flexibility</td>
+                                <td>12</td>
+                                <td>
+                                    <div style="background: #f0f0f0; border-radius: 5px; height: 10px; width: 100%;">
+                                        <div style="background: var(--success); height: 100%; width: 78%; border-radius: 5px;"></div>
+                                    </div>
+                                    <small>78%</small>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>David Wilson</td>
+                                <td>Cardio & Weight Loss</td>
+                                <td>18</td>
+                                <td>
+                                    <div style="background: #f0f0f0; border-radius: 5px; height: 10px; width: 100%;">
+                                        <div style="background: var(--success); height: 100%; width: 92%; border-radius: 5px;"></div>
+                                    </div>
+                                    <small>92%</small>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px;">View Details</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support Section -->
+        <div id="support" class="section">
+            <div class="tabs">
+                <div class="tab active" data-tab="view-tickets">View Tickets</div>
+                <div class="tab" data-tab="create-ticket">Create Ticket</div>
+            </div>
+            
+            <div id="view-tickets" class="tab-content">
+                <div class="table-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Support Tickets</h3>
+                        <div>
+                            <select style="padding: 8px 15px; border: 1px solid #ddd; border-radius: 4px; margin-right: 10px;">
+                                <option>All Status</option>
+                                <option>Open</option>
+                                <option>In Progress</option>
+                                <option>Resolved</option>
+                            </select>
+                            <select style="padding: 8px 15px; border: 1px solid #ddd; border-radius: 4px; margin-right: 10px;">
+                                <option>All Priority</option>
+                                <option>Low</option>
+                                <option>Medium</option>
+                                <option>High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>Issue Type</th>
+                                <th>Priority</th>
+                                <th>Submitted By</th>
+                                <th>Assigned To</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#TKT-001</td>
+                                <td>Equipment Issue</td>
+                                <td><span class="status status-high">High</span></td>
+                                <td>John Doe</td>
+                                <td>Michael Roberts</td>
+                                <td><span class="status status-open">Open</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-success" style="padding: 5px 10px;"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#TKT-002</td>
+                                <td>Membership Query</td>
+                                <td><span class="status status-medium">Medium</span></td>
+                                <td>Sarah Smith</td>
+                                <td>Unassigned</td>
+                                <td><span class="status status-open">Open</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-success" style="padding: 5px 10px;"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#TKT-003</td>
+                                <td>Billing Issue</td>
+                                <td><span class="status status-high">High</span></td>
+                                <td>Mike Johnson</td>
+                                <td>Admin</td>
+                                <td><span class="status status-resolved">Resolved</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-success" style="padding: 5px 10px;"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="create-ticket" class="tab-content" style="display: none;">
+                <div class="form-container">
+                    <h3 style="margin-bottom: 20px;">Create New Support Ticket</h3>
+                    <form id="ticket-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="issue-type">Issue Type</label>
+                                <select id="issue-type" required>
+                                    <option value="">Select Issue Type</option>
+                                    <option value="equipment">Equipment Issue</option>
+                                    <option value="membership">Membership Query</option>
+                                    <option value="billing">Billing Issue</option>
+                                    <option value="trainer">Trainer Related</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="priority">Priority</label>
+                                <select id="priority" required>
+                                    <option value="">Select Priority</option>
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reported-by">Reported By</label>
+                                <input type="text" id="reported-by" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="assigned-to">Assign To</label>
+                                <select id="assigned-to">
+                                    <option value="">Select Staff Member</option>
+                                    <option value="trainer1">Michael Roberts</option>
+                                    <option value="trainer2">Sarah Johnson</option>
+                                    <option value="trainer3">David Wilson</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="issue-description">Issue Description</label>
+                            <textarea id="issue-description" rows="4" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Create Ticket</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div id="reports" class="section">
+            <div class="tabs">
+                <div class="tab active" data-tab="membership-reports">Membership Reports</div>
+                <div class="tab" data-tab="revenue-reports">Revenue Reports</div>
+                <div class="tab" data-tab="trainer-reports">Trainer Performance</div>
+            </div>
+            
+            <div id="membership-reports" class="tab-content">
+                <div class="chart-container">
+                    <h3 class="chart-title">Membership Growth Report</h3>
+                    <canvas id="membershipReportChart"></canvas>
+                </div>
+                
+                <div class="table-container">
+                    <h3 class="chart-title">Membership Statistics</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Current Month</th>
+                                <th>Previous Month</th>
+                                <th>Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>New Members</td>
+                                <td>45</td>
+                                <td>36</td>
+                                <td style="color: var(--success);">+25%</td>
+                            </tr>
+                            <tr>
+                                <td>Renewed Members</td>
+                                <td>35</td>
+                                <td>32</td>
+                                <td style="color: var(--success);">+9%</td>
+                            </tr>
+                            <tr>
+                                <td>Cancelled Memberships</td>
+                                <td>5</td>
+                                <td>8</td>
+                                <td style="color: var(--success);">-38%</td>
+                            </tr>
+                            <tr>
+                                <td>Total Members</td>
+                                <td>245</td>
+                                <td>220</td>
+                                <td style="color: var(--success);">+11%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="revenue-reports" class="tab-content" style="display: none;">
+                <div class="chart-container">
+                    <h3 class="chart-title">Revenue Report</h3>
+                    <canvas id="revenueReportChart"></canvas>
+                </div>
+                
+                <div class="table-container">
+                    <h3 class="chart-title">Revenue by Plan Type</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plan Type</th>
+                                <th>Current Month</th>
+                                <th>Previous Month</th>
+                                <th>Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monthly Plans</td>
+                                <td>$2,970</td>
+                                <td>$2,574</td>
+                                <td style="color: var(--success);">+15%</td>
+                            </tr>
+                            <tr>
+                                <td>Quarterly Plans</td>
+                                <td>$3,250</td>
+                                <td>$3,000</td>
+                                <td style="color: var(--success);">+8%</td>
+                            </tr>
+                            <tr>
+                                <td>Yearly Plans</td>
+                                <td>$2,400</td>
+                                <td>$2,400</td>
+                                <td style="color: var(--gray);">0%</td>
+                            </tr>
+                            <tr>
+                                <td>Premium Plans</td>
+                                <td>$2,400</td>
+                                <td>$2,400</td>
+                                <td style="color: var(--gray);">0%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Revenue</strong></td>
+                                <td><strong>$11,020</strong></td>
+                                <td><strong>$10,374</strong></td>
+                                <td style="color: var(--success);"><strong>+6%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="trainer-reports" class="tab-content" style="display: none;">
+                <div class="chart-container">
+                    <h3 class="chart-title">Trainer Performance</h3>
+                    <canvas id="trainerReportChart"></canvas>
+                </div>
+                
+                <div class="table-container">
+                    <h3 class="chart-title">Trainer Statistics</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Trainer</th>
+                                <th>Members Assigned</th>
+                                <th>Avg. Session Attendance</th>
+                                <th>Member Retention</th>
+                                <th>Performance Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Michael Roberts</td>
+                                <td>15</td>
+                                <td>92%</td>
+                                <td>88%</td>
+                                <td>90%</td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td>12</td>
+                                <td>85%</td>
+                                <td>82%</td>
+                                <td>83%</td>
+                            </tr>
+                            <tr>
+                                <td>David Wilson</td>
+                                <td>18</td>
+                                <td>95%</td>
+                                <td>91%</td>
+                                <td>93%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Average</strong></td>
+                                <td><strong>15</strong></td>
+                                <td><strong>91%</strong></td>
+                                <td><strong>87%</strong></td>
+                                <td><strong>89%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="section">
+            <div class="tabs">
+                <div class="tab active" data-tab="business-profile">Business Profile</div>
+                <div class="tab" data-tab="user-roles">User Roles</div>
+                <div class="tab" data-tab="notifications">Notifications</div>
+            </div>
+            
+            <div id="business-profile" class="tab-content">
+                <div class="form-container">
+                    <h3 style="margin-bottom: 20px;">Business Profile Settings</h3>
+                    <form id="business-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="gym-name">Gym Name</label>
+                                <input type="text" id="gym-name" value="Elite Fitness Center" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gym-phone">Phone Number</label>
+                                <input type="tel" id="gym-phone" value="+1 555-123-4567" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="gym-email">Email Address</label>
+                                <input type="email" id="gym-email" value="info@elitefitness.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gym-website">Website</label>
+                                <input type="url" id="gym-website" value="https://www.elitefitness.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gym-address">Address</label>
+                            <input type="text" id="gym-address" value="123 Fitness Street, Health City, HC 12345" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="business-hours">Business Hours</label>
+                                <input type="text" id="business-hours" value="Mon-Fri: 5:00 AM - 11:00 PM, Sat-Sun: 6:00 AM - 10:00 PM">
+                            </div>
+                            <div class="form-group">
+                                <label for="gym-logo">Gym Logo</label>
+                                <input type="file" id="gym-logo">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div id="user-roles" class="tab-content" style="display: none;">
+                <div class="table-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>User Roles & Permissions</h3>
+                        <button class="btn btn-primary">Add New User</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Permissions</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>admin</td>
+                                <td>admin@elitefitness.com</td>
+                                <td>Administrator</td>
+                                <td>Full Access</td>
+                                <td><span class="status status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>manager</td>
+                                <td>manager@elitefitness.com</td>
+                                <td>Manager</td>
+                                <td>Members, Payments, Reports</td>
+                                <td><span class="status status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>trainer1</td>
+                                <td>michael@elitefitness.com</td>
+                                <td>Trainer</td>
+                                <td>Member Assignments, Attendance</td>
+                                <td><span class="status status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; margin-right: 5px;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="form-container">
+                    <h3 style="margin-bottom: 20px;">Role Permissions</h3>
+                    <form id="permissions-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="role-select">Select Role</label>
+                                <select id="role-select">
+                                    <option value="administrator">Administrator</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="trainer">Trainer</option>
+                                    <option value="reception">Reception</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Permissions</label>
+                                <div style="margin-top: 10px;">
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="perm-members" checked>
+                                        <label for="perm-members">Members Management</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="perm-payments" checked>
+                                        <label for="perm-payments">Payments Management</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="perm-trainers">
+                                        <label for="perm-trainers">Trainers Management</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="perm-reports">
+                                        <label for="perm-reports">View Reports</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="perm-settings">
+                                        <label for="perm-settings">System Settings</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save Permissions</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div id="notifications" class="tab-content" style="display: none;">
+                <div class="form-container">
+                    <h3 style="margin-bottom: 20px;">Notification Settings</h3>
+                    <form id="notifications-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Notification Methods</label>
+                                <div style="margin-top: 10px;">
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="notify-email" checked>
+                                        <label for="notify-email">Email Notifications</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="notify-sms" checked>
+                                        <label for="notify-sms">SMS Notifications</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="notify-whatsapp">
+                                        <label for="notify-whatsapp">WhatsApp Notifications</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Notification Types</label>
+                                <div style="margin-top: 10px;">
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="notify-renewals" checked>
+                                        <label for="notify-renewals">Membership Renewals</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="notify-payments" checked>
+                                        <label for="notify-payments">Payment Reminders</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="notify-announcements">
+                                        <label for="notify-announcements">Gym Announcements</label>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="notify-events">
+                                        <label for="notify-events">Upcoming Events</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="notify-days">Days Before Renewal to Notify</label>
+                                <input type="number" id="notify-days" value="7" min="1" max="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="notify-time">Preferred Notification Time</label>
+                                <input type="time" id="notify-time" value="09:00">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save Notification Settings</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
