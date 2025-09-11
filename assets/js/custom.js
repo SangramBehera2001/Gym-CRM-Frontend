@@ -547,3 +547,38 @@ function scrollTopPercentage() {
     }
   }
   window.addEventListener("scroll", reveal1); 
+
+
+
+
+
+  // Mobile Navigation
+$(document).ready(function() {
+  // Toggle mobile menu
+  $('.mobile-menu-toggle').on('click', function() {
+    $(this).toggleClass('active');
+    $('#mobile-nav').toggleClass('active');
+    $('.overlay').toggleClass('active');
+  });
+  
+  // Close mobile menu
+  $('#res-cross').on('click', function() {
+    $('.mobile-menu-toggle').removeClass('active');
+    $('#mobile-nav').removeClass('active');
+    $('.overlay').removeClass('active');
+  });
+  
+  // Close menu when clicking on overlay
+  $('.overlay').on('click', function() {
+    $('.mobile-menu-toggle').removeClass('active');
+    $('#mobile-nav').removeClass('active');
+    $(this).removeClass('active');
+  });
+  
+  // Close menu when clicking on a link
+  $('#mobile-nav a').on('click', function() {
+    $('.mobile-menu-toggle').removeClass('active');
+    $('#mobile-nav').removeClass('active');
+    $('.overlay').removeClass('active');
+  });
+});
