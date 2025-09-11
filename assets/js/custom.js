@@ -69,7 +69,7 @@ jQuery(document).ready(function ($) {
     /* 03 Team Slider */ 
     if ($(".team-slider")[0]){
         $('.team-slider.owl-carousel').owlCarousel({
-             loop: true,
+            loop: false,
             nav:true,
             navText: ["<i class='fa-solid fa-arrow-left-long'></i>","<i class='fa-solid fa-arrow-right-long'></i>"],
             dots: false,
@@ -88,7 +88,8 @@ jQuery(document).ready(function ($) {
                     items:3
                 },
                 1200:{
-                    items:4
+                    // items:4
+                    item: 3 
                 }
             }
         }); 

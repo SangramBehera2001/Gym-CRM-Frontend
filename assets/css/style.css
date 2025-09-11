@@ -971,12 +971,29 @@ p.p-quote {
 /* 1. General Style End */
  
 /* 2. Service Style One Start */
+.service-style-one .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
 .service-style-one .service-data {
-    width: 100%;
+   
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #e8e8e8;
+  padding: 40px;
+  position: relative;
+
+    /* width: 100%;
     margin: auto;
     position: relative;
     border: 1px solid #e8e8e8;
-    padding: 40px;
+    padding: 40px; */
 }
 .service-style-one .service-data .icon:hover {
     background-color: #fff;
@@ -3006,9 +3023,30 @@ a.theme-btn:hover:after {
 /* 16. Pricing Plans End */
 
 /* 17. Service Style Two Start */
+.service-style-two .row.g-0 {
+  align-items: stretch;
+}
+
+
 .service-style-two .service-two-box { 
-    padding: 40px 40px 0;
     position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* center title/description vertically */
+  padding: 36px 40px;      /* keep your original padding feel */
+  min-height: 260px;       /* tweak this value to your desired card height */
+  height: 100%;
+  background-size: cover !important;
+  background-position: center center !important;
+  overflow: hidden;
+  color: #fff;
+  transition: transform .25s ease; /* keep hover scale smooth */
+  z-index: 0;
+
+
+
+    /* padding: 40px 40px 0;
+    position: relative; */
 }
 .service-two-box i.flaticon {
     position: absolute;
@@ -3021,6 +3059,22 @@ a.theme-btn:hover:after {
 }
 .service-style-two .service-two-box:before {
     content: "";
+  position: absolute;
+  inset: 0;                 /* shorthand for top:0;right:0;bottom:0;left:0; */
+  background-color: rgba(0,0,0,0.50); /* same as your opacity rule but easier to tweak */
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  z-index: 0;
+  pointer-events: none;
+  transition: background-color .2s ease, opacity .2s ease;
+
+
+
+
+
+
+
+    /* content: "";
     width: 100%;
     height: 100%;
     position: absolute;
@@ -3030,7 +3084,7 @@ a.theme-btn:hover:after {
     background-position: right bottom;
     z-index: 0;
     opacity: .50; 
-    background-color: #000;
+    background-color: #000; */
 }
 .service-style-two .service-two-box:hover:before {
     opacity: .70;
@@ -3134,6 +3188,8 @@ transform: scaleX(1);
 /* 17. Service Style Two End */
 
 /* 18. Certificates start */
+
+
 .certificates .data {
     position: relative;
 }
@@ -3141,6 +3197,7 @@ transform: scaleX(1);
         padding-right: 30px;
     }
 .certificates .data .c-img { 
+
     position: relative;
 }
 .certificates .data .c-img img {
@@ -3475,6 +3532,14 @@ figure.est-img {
 }
 .contact-us .c-data .map {
     margin-top: -124px;
+    /* Chnanges starts from here */
+    z-index: -11;
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;   /* centers the map */
+    max-width: 80%;       /* optional: keeps it responsive */
+    height: auto;
 }
 .contact-us .c-data ul li a img {
     width: 125px;
@@ -3547,10 +3612,16 @@ figure.est-img {
     width: 100%;
     position: absolute;
     top: 0;
-    left: -6%;
+    left: 35%;
+    /* top: 50%; 
+    left: 50%; */
+     transform: translate(-50%, -50%);/*  centers the UL on the map */
+    gap: 40px;  /* spacing between avatars */
+    justify-content: center;
 }
 .contact-us .c-data ul li {
     position: absolute;
+    /* position: relative; */
 }
 .contact-us .c-data ul li:nth-child(1) {
     top: 100px;
@@ -3756,6 +3827,7 @@ figure.est-img {
 /* 23. CTA Section Start */
 .cta-section {
     overflow: hidden;
+     padding-bottom: 80px; /*padding-bottom added newly */
 }
 .cta-section .cta-data h2 {
     font-size: 100px;
@@ -3774,11 +3846,16 @@ figure.est-img {
     color: black;
 }
 .cta-section .cta-data figure img {
-    margin-left: -205px;
+    /* margin-left: -205px; */
+    margin-left: 0;     
+    max-width: 100%;   /* scale properly */
+    height: auto;      /* maintain aspect ratio */
+    display: block;
 }
 .cta-section .cta-data figure {
     position: relative;
-    overflow: visible;
+    /* overflow: visible; */
+    overflow: hidden;
 }
 /* 23. CTA Section Start */
 
@@ -4375,6 +4452,18 @@ div#countdown ul li {
 
 /* 30. Banner Style One Start */
 .banner-style-one {
+    /* position: relative;
+    width: 100%;
+    height: 100vh; /* full screen like homepage */
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;  */
+
+
+
+
     background: gray;
     padding-top: 215px;
     position: relative;
@@ -4551,6 +4640,10 @@ div#countdown ul li {
 /* 35. Contact Faqs End */
 
 /* 36. Contact Form 2 Start */
+
+
+
+
 .contact-form-2 .data span {
     font-size: 16px;
     color: #444;
@@ -4588,6 +4681,9 @@ div#countdown ul li {
     margin-bottom: 15px;
 }
 .contact-form-2 .info {
+
+
+
     background: black;
     padding: 35px 40px 40px;
 }
@@ -7898,6 +7994,13 @@ ul.image-gallery li:before,
 }
 
 
+
+
+/* 
+forcefully update the bacoground logo for the founder's photo */
+section.team-style-one .team-data .team-info svg {
+  display: none !important;
+}
 
 
 
