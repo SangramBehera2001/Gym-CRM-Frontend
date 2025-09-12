@@ -36,6 +36,7 @@
         24 Preloader
         25. days time
         26 scrollTop
+        27 Roi calculator
 
 -----------------------------------------------------------------------------------*/
 
@@ -582,4 +583,11 @@ $(document).ready(function() {
     $('#mobile-nav').removeClass('active');
     $('.overlay').removeClass('active');
   });
+
+  
+
+
+
+
+
 });

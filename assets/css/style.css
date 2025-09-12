@@ -175,7 +175,9 @@ button.owl-prev i,button.owl-next i {
     text-align: center;
 }
 .heading img {
-    width: 50px;
+    /* width: 50px; */
+    width: 160px;   /* adjust size */
+  height: auto;   /* keeps aspect ratio */
 }
 .client-review-style-one .head-review span,
 .heading span, .heading-style-2, .data span {
@@ -2198,6 +2200,13 @@ footer:before {
 
 
 
+
+
+
+
+
+
+
 /* 14. Header Style One Start */
 .header-style-one {
     position: absolute;
@@ -2215,9 +2224,10 @@ footer:before {
     font-family: var(--theme-found);
 }
 .header-logo a img {
-    width: 180px;
+    width: 100px;
     height: auto;
 }
+
 .header-style-one .nav-bar > ul > li:not(:last-child) {
     margin-right: 40px;
 }
@@ -2439,7 +2449,6 @@ footer:before {
     width: 25px;
     fill: white;
 }
-
 
 
 
@@ -3029,7 +3038,7 @@ a.theme-btn:hover:after {
 
 
 .service-style-two .service-two-box { 
-    position: relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center; /* center title/description vertically */
