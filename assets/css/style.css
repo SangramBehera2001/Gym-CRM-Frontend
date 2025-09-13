@@ -3423,7 +3423,7 @@ transform: scaleX(1);
 /* 19. Blog Style Two End */
 
 /* 20. Estimated Price Start */
-.estimated-price {
+  .estimated-price {
     background: #fff5ed;
     position: relative;
 }
@@ -3456,7 +3456,7 @@ transform: scaleX(1);
 }
 .estimated-price .est-form .est-main {
     margin-top: 52px;
-}
+} 
  .fit_bmichart {
     background-color: #000;
     padding: 30px;
@@ -3534,6 +3534,22 @@ figure.est-img {
     margin-bottom: 24px;
 }   
 /* 20. Estimated Price End */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 21. Contact Us Start */
 .contact-us .heading h2 {
@@ -4165,15 +4181,16 @@ header.header-style-one.three .theme-btn:hover {
 }
 header.header-style-one.three .theme-btn {
     border: 1px solid #fff ; 
-} header.header-style-one.three .header-logo:before {
+} 
+/* header.header-style-one.three .header-logo:before {
     content: "";
     background-color: #fff;
     position: absolute;
-    width: 230px;
-    height: 110px;
-    top: -25px;
-    left: -25px;
-} 
+    width: 120px;
+    height: 120px;
+    top: -60px;
+    left: -12px;
+}  */
 header.header-style-one.three .header-logo img {
     position: relative;
     z-index: 1111;
@@ -4228,6 +4245,13 @@ a.phone-number i {
 }
 
 /* 26. header-style-one.three End */
+
+
+
+
+
+
+
 
 /* 27. hero-section-three Start */
  
