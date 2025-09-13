@@ -20,6 +20,25 @@
   <!-- Responsive -->
   <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head> 
  
 <body>
@@ -81,7 +100,7 @@
   </div>
 
   <!-- Mobile Nav -->
-  <div class="mobile-nav" id="mobile-nav">
+  <!-- <div class="mobile-nav" id="mobile-nav">
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -91,7 +110,29 @@
       <li><a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a></li>
     </ul>
     <a href="javascript:void(0)" id="res-cross"></a>
+  </div> -->
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <div class="mobile-nav-inner">
+    <div class="mobile-nav-header">
+      <a class="mobile-logo" href="index.html">
+        <img src="assets/images/Gym-crm-new-logo.webp" alt="Logo" />
+      </a>
+      <button id="res-close" class="mobile-nav-close" aria-label="Close menu">&times;</button>
+    </div>
+
+    <ul class="mobile-nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="our-blog-2.html">Blogs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a></li>
+    </ul>
   </div>
+  <!-- overlay background to close when clicked -->
+  <div class="mobile-nav-backdrop" id="mobile-backdrop"></div>
+</div>
+
 </header>
 <!-- Header Style One End -->
 
