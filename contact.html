@@ -486,23 +486,14 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content signup-modal">
       <div class="modal-header">
-        <h5 class="modal-title" id="signupModalLabel">SIGN UP FOR FREE TRIAL</h5>
+        <h5 class="modal-title" id="signupModalLabel">SIGN UP</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="signupForm">
-          <!-- Business Name -->
-          <div class="mb-3">
-            <label class="form-label">Business Name</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fas fa-building"></i></span>
-              <input type="text" class="form-control" placeholder="Enter your business name" required>
-            </div>
-          </div>
-
           <!-- Full Name -->
           <div class="mb-3">
-            <label class="form-label">Your Name</label>
+            <label class="form-label">Full Name</label>
             <div class="input-group">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
               <input type="text" class="form-control" placeholder="Enter your full name" required>
@@ -527,15 +518,32 @@
             </div>
           </div>
 
-          <!-- Business Size -->
+          <!-- Gender -->
           <div class="mb-3">
-            <label class="form-label">Number of Members</label>
-            <select class="form-select" required>
-              <option selected disabled>Select range</option>
-              <option>1-50</option>
-              <option>51-200</option>
-              <option>201-500</option>
-              <option>500+</option>
+            <label class="form-label">Gender</label><br>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="gender" id="male" value="male" checked>
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="gender" id="female" value="female">
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="gender" id="other" value="other">
+              <label class="form-check-label" for="other">Other</label>
+            </div>
+          </div>
+
+          <!-- Membership Type -->
+          <div class="mb-3">
+            <label class="form-labell">Membership Type</label>
+            <select class="form-selectt" required>
+              <option selected disabled>Choose Membership</option>
+              <option>Basic (1 Month)</option>
+              <option>Standard (3 Months)</option>
+              <option>Premium (6 Months)</option>
+              <option>Annual (12 Months)</option>
             </select>
           </div>
 
@@ -561,7 +569,7 @@
 
           <!-- Button -->
           <button type="submit" class="btn btn-theme w-100">
-            <i class="fas fa-user-plus me-2"></i> Start Free Trial
+            <i class="fas fa-user-plus me-2"></i> Create Account
           </button>
 
           <!-- Footer -->
@@ -584,7 +592,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content signin-modal">
       <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">SIGN IN TO YOUR ACCOUNT</h5>
+        <h5 class="modal-title" id="loginModalLabel">SIGN IN</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -624,7 +632,7 @@
 
           <!-- Footer -->
           <div class="text-center mt-3">
-            Don't have an account? 
+            Don’t have an account? 
             <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign Up now</a>
           </div>
         </form>
