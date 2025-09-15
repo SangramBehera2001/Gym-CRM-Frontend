@@ -104,15 +104,15 @@ html {
 
 
 
-/* body {
+body {
     overflow-x: hidden; 
     font-family: var(--theme-found);
-} */
+}
 
-body {
+/* body {
     font-family: 'DM Sans', sans-serif;
     overflow-x: hidden;
-}
+} */
 
 
 
@@ -186,9 +186,9 @@ button.owl-prev i,button.owl-next i {
     text-align: center;
 }
 .heading img {
-    /* width: 50px; */
-    width: 160px;   /* adjust size */
-  height: auto;   /* keeps aspect ratio */
+    width: 50px;
+    /* width: 160px;  
+  height: auto;    */
 }
 .client-review-style-one .head-review span,
 .heading span, .heading-style-2, .data span {
@@ -974,24 +974,16 @@ p.p-quote {
     }
 } 
 
-
-
-
-
-
-
-
 /* 1. General Style End */
  
 /* 2. Service Style One Start */
-.service-style-one .row {
+/* .service-style-one .row {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
 
-
-.9 .service-data {
+ /* .service-data {
    
   display: flex;
   flex-direction: column;
@@ -1000,14 +992,25 @@ p.p-quote {
   width: 100%;
   border: 1px solid #e8e8e8;
   padding: 40px;
-  position: relative;
+  position: relative; 
+}*/
 
     /* width: 100%;
     margin: auto;
     position: relative;
     border: 1px solid #e8e8e8;
     padding: 40px; */
-}
+
+
+
+/* 2. Service Style One Start */
+.service-style-one .service-data {
+    width: 100%;
+    margin: auto;
+    position: relative;
+    border: 1px solid #e8e8e8;
+    padding: 40px;
+}    
 .service-style-one .service-data .icon:hover {
     background-color: #fff;
     color: #000;
@@ -1278,7 +1281,7 @@ span.counter {
 }
 .project-data h3 a {
     color: #fff;
-    padding-top: 10px;
+    padding-top: 10px;  
     display: block;
     text-transform: uppercase;
     font-size: 40px;
@@ -1477,6 +1480,7 @@ span.counter {
 
 /* 6. Team Style One End */
 
+
 /* 7. Featured Slider One Start */
 
 .f-slider-one img {
@@ -1554,7 +1558,7 @@ span.counter {
 }
 .featured-slider-one .owl-item.active .f-slider-one-data span{
     animation-duration: .8s;
-} 
+}   
 .featured-slider-one .owl-item.active .f-slider-one-data h1 {
     animation-duration: 1s;
 }
@@ -2234,17 +2238,26 @@ footer:before {
     color: white;
     font-family: var(--theme-found);
 }
+
+/* changes */
+
+/* .header-logo a img {
+    width: 100px;
+    height: auto;
+} */
+
 .header-logo a img {
     width: 100px;
     height: auto;
 }
-
 .header-style-one .nav-bar > ul > li:not(:last-child) {
     margin-right: 40px;
 }
-
-
-
+.header-style-one .desktop-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 
@@ -2258,13 +2271,6 @@ footer:before {
 
 
 
-.header-style-one .desktop-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
 
 
 /* .header-style-one .desktop-nav {
@@ -2275,10 +2281,10 @@ footer:before {
     padding: 0; 
 }*/
 
-.header-style-one .desktop-nav .container-fluid {
+/* .header-style-one .desktop-nav .container-fluid {
   padding-left: 0;
   padding-right: 0;
-} */
+}  */
 
 
 
@@ -2322,85 +2328,14 @@ footer:before {
     font-family: var(--common-found);
     text-transform: uppercase;
 
-
-
 /* Changes made from origin */
-
-
     color: white;
-
-
-
     /* changes made end */
 
 }
 .desktop-nav .nav-bar > ul > li:last-child > a {
-
     margin-right: 0;
-
 }
-
-
-
-
- /* changes made by swarup */
-
-
-/* .mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-}
-
-.mobile-menu-toggle span {
-    width: 100%;
-    height: 3px;
-    background-color: #fff;
-    margin: 2px 0;
-    transition: all 0.3s ease;
-}
-
-.mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-} */
-
-
-
-
-/* changes made by swarup end */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .desktop-nav ul.sub-menu > li  > ul {
     left: 100% !important;
     top: 0px !important;
@@ -2495,10 +2430,19 @@ footer:before {
     -moz-transform: translateY(50px);
     -o-transform: translateY(50px);
 }
-.desktop-nav .nav-bar > ul > li.menu-item-has-children > a:before {
-    content: "";
-    background-image: url('../images/down-arrow.svg');
-    background-repeat: no-repeat;
+
+
+/* Navbar dropdown option for desktop */
+
+
+
+.desktop-nav .nav-bar > ul > li.menu-item-has-children > a:before 
+{
+
+    /* content: ""; */
+    content: none !important;
+    /* background-image: url('../images/down-arrow.svg'); */
+    /* background-repeat: no-repeat;
     position: absolute;
     top: 60%;
     transform: translateY(-50%);
@@ -2507,8 +2451,10 @@ footer:before {
     -o-transform: translateY(-50%);
     right: -15px;
     width: 10px;
-    height: 10px; 
+    height: 10px;  */
 }
+
+
 .desktop-nav .nav-bar > ul > li.menu-item-has-children > a:hover:before{
     background-image: url('../images/down-arrow-clr.svg');
 }
@@ -2583,12 +2529,6 @@ footer:before {
     width: 25px;
     fill: white;
 }
-
-
-
-
-
-
  /* 04. cart popup */
 .cart-popup:before {
     content: "";
@@ -2725,30 +2665,28 @@ footer:before {
     display: flex;
     align-items: center;
 }
+.header-style-one .desktop-nav .nav-bar {
+    display: flex;
+    align-items: center;
+} 
 
 
 
 
 /* changes made here */
 
-
-
-
-
-
-
-
-
+/* 
 .header-style-one .desktop-nav .nav-bar {
-    flex: 1;                /* allow nav-bar to take full space */
-    display: flex;          
-    justify-content: center; /* center items horizontally */
-} 
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+/* } 
 
 .header-style-one .desktop-nav .nav-bar > ul {
   display: flex;
-  gap: 15px; /* adjust spacing between menu items */
-}
+  gap: 15px; 
+}  */ 
 
 
 
@@ -2757,7 +2695,8 @@ footer:before {
 
 
 
-/* cjanges ends here */
+/* changes ends here */
+
 
 
 
@@ -2826,9 +2765,10 @@ footer:before {
     width: 11px;
 }
 .mobile-nav ul > li.menu-item-has-children:before {
-    content: "";
-    background-image: url(../images/down-arrow.svg);
-    background-repeat: no-repeat;
+    /* content: ""; */
+    content: none !important;
+    /* background-image: url(../images/down-arrow.svg); */
+    /* background-repeat: no-repeat;
     position: absolute;
     top: 36px;
     right: 0;
@@ -2837,7 +2777,7 @@ footer:before {
     transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg); */
 }
 .mobile-nav > ul li.menu-item-has-children.active ul.sub-menu li:before {
     top: 12px;
@@ -2995,7 +2935,7 @@ a.theme-btn:hover:after {
   stroke-width: 3;
 }
 .open .line2 {
-  stroke-dasharray: 1 60;
+  stroke-dasharray: 1 60;   
   stroke-dashoffset: -30;
   stroke-width: 3;
 }
@@ -3194,6 +3134,10 @@ a.theme-btn:hover:after {
 /* 16. Pricing Plans End */
 
 /* 17. Service Style Two Start */
+
+
+
+/* changes add */
 .service-style-two .row.g-0 {
   align-items: stretch;
 }
@@ -3257,6 +3201,18 @@ a.theme-btn:hover:after {
     opacity: .50; 
     background-color: #000; */
 }
+
+
+
+/* end */
+
+
+
+
+
+
+
+
 .service-style-two .service-two-box:hover:before {
     opacity: .70;
     visibility: visible;
@@ -3368,7 +3324,6 @@ transform: scaleX(1);
         padding-right: 30px;
     }
 .certificates .data .c-img { 
-
     position: relative;
 }
 .certificates .data .c-img img {
@@ -3697,28 +3652,18 @@ figure.est-img {
 }   
 /* 20. Estimated Price End */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 21. Contact Us Start */
 .contact-us .heading h2 {
     width: 30%;
 }
 .contact-us .c-data .map {
     margin-top: -124px;
+
+
+
+
+
+
     /* Chnanges starts from here */
     z-index: -11;
     position: relative;
@@ -3727,6 +3672,17 @@ figure.est-img {
     margin-right: auto;   /* centers the map */
     max-width: 80%;       /* optional: keeps it responsive */
     height: auto;
+
+
+
+
+
+
+
+
+
+
+
 }
 .contact-us .c-data ul li a img {
     width: 125px;
@@ -3800,15 +3756,22 @@ figure.est-img {
     position: absolute;
     top: 0;
     left: 35%;
+
+
+   /* changes */
+
+
+
     /* top: 50%; 
     left: 50%; */
      transform: translate(-50%, -50%);/*  centers the UL on the map */
     gap: 40px;  /* spacing between avatars */
     justify-content: center;
 }
+
+/* end */
 .contact-us .c-data ul li {
     position: absolute;
-    /* position: relative; */
 }
 .contact-us .c-data ul li:nth-child(1) {
     top: 100px;
@@ -4014,7 +3977,14 @@ figure.est-img {
 /* 23. CTA Section Start */
 .cta-section {
     overflow: hidden;
+
+
+    /* changes */
      padding-bottom: 80px; /*padding-bottom added newly */
+
+
+
+     /* end */
 }
 .cta-section .cta-data h2 {
     font-size: 100px;
@@ -4032,6 +4002,10 @@ figure.est-img {
 .cta-section .cta-data .theme-btn:hover {
     color: black;
 }
+
+/* chnages */
+
+
 .cta-section .cta-data figure img {
     /* margin-left: -205px; */
     margin-left: 0;     
@@ -4044,6 +4018,10 @@ figure.est-img {
     /* overflow: visible; */
     overflow: hidden;
 }
+
+
+
+/* end */
 /* 23. CTA Section Start */
 
 /* 24. Shop Style One Start */ 
@@ -4383,7 +4361,7 @@ header.header-style-one.three .desktop-nav > .container {
     /* max-width: 100%;
     padding-left: 0;
     padding-right: 0; */
-     max-width: 1200px;   /* keep your logo/menu centered in a max width */
+  max-width: 1200px;   /* keep your logo/menu centered in a max width */
   margin: 0 auto;
   padding-left: 20px;  /* adjust to match your layout */
   padding-right: 20px;
@@ -4412,26 +4390,24 @@ header.header-style-one.three .desktop-nav::before {
 
 
 
-/* changes made end */
 
 
 
 
-
-
-
-
-
-
-
-
-header.header-style-one.three .header-logo img {
+/* header.header-style-one.three .header-logo img {
     position: relative;
     z-index: 1111;
 }
  header.header-style-one.three .header-logo {
     position: relative;
-} 
+}  */
+
+
+
+/* changes made end */
+
+
+
 header.header-style-one.three .desktop-nav .nav-bar > ul > li.menu-item-has-children > a:before {
      filter: sepia(111);
 }
@@ -4479,57 +4455,6 @@ a.phone-number i {
 }
 
 /* 26. header-style-one.three End */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 27. hero-section-three Start */
@@ -4764,7 +4689,7 @@ div#countdown ul li {
 
 /* 30. Banner Style One Start */
 .banner-style-one {
-/* background: black; */
+background: black;
     background: gray;
     padding-top: 215px;
     position: relative;
@@ -4941,7 +4866,6 @@ div#countdown ul li {
 /* 35. Contact Faqs End */
 
 /* 36. Contact Form 2 Start */
-
 .contact-form-2 .data span {
     font-size: 16px;
     color: #444;
@@ -5355,6 +5279,7 @@ ul.social-medias {
 /* 45. Blog Style Three End */
 
 /* 46. Blog Style Three Start */
+
 .sidebar .box h3 {
     font-size: 32px;
     color: #000;
@@ -7056,14 +6981,6 @@ ul.pd-price li:not(:last-child){
 /* changes ade here */
 
 
-
-
-
-
-
-
-
-
 .timetable-section .timetable-tabs .tab-btns .tab-btn {
     position: relative;
     display: block;
@@ -7311,7 +7228,7 @@ header.header-style-one.two .theme-btn:hover {
     transition-delay: .8s;
     transform: translateY(0)
 }
-.featured-text-two p {
+    .featured-text-two p {
     color: #fff;
     opacity: 0;
     visibility: hidden;
@@ -8032,6 +7949,9 @@ ul.image-gallery li:before,
 
 
 
+
+
+
 /* Duplicate DropDown */
 
 /* =======================
@@ -8345,14 +8265,35 @@ ul.image-gallery li:before,
 
 
 
-
-
-
 /* 
 forcefully update the bacoground logo for the founder's photo */
 section.team-style-one .team-data .team-info svg {
   display: none !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
