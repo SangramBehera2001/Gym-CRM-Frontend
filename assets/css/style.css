@@ -991,7 +991,7 @@ p.p-quote {
 
 
 
-.service-style-one .service-data {
+.9 .service-data {
    
   display: flex;
   flex-direction: column;
@@ -1674,7 +1674,7 @@ span.counter {
 .client-style-one .owl-carousel .owl-stage {
     position: relative;
     -ms-touch-action: pan-Y;
-    touch-action: manipulation;
+    touch-action: manipulation; 
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     display: flex;
@@ -2242,17 +2242,64 @@ footer:before {
 .header-style-one .nav-bar > ul > li:not(:last-child) {
     margin-right: 40px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Changes made by us start */
+
+
+
 .header-style-one .desktop-nav {
-    background: var(--theme-color); /* red */
-    width: 100%;       /* full width */
-    /* margin: 0;
-    padding: 0; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+
+
+
+/* .header-style-one .desktop-nav {
+    background: var(--theme-color); 
+    /* red */
+    /* width: 100%;       full width */
+    /* margin: 0;
+    padding: 0; 
+}*/
 
 .header-style-one .desktop-nav .container-fluid {
   padding-left: 0;
   padding-right: 0;
-}
+} */
+
+
+
+
+
+
+
+
+
+/* Changes made by us end */
+
+
+
+
+
+
+
+
+
+
+
 
 .header-style-one .desktop-nav.slideDown,
 .header-style-one .desktop-nav.slideUp {
@@ -2274,15 +2321,23 @@ footer:before {
     position: relative;
     font-family: var(--common-found);
     text-transform: uppercase;
+
+
+
+/* Changes made from origin */
+
+
     color: white;
+
+
+
+    /* changes made end */
 
 }
 .desktop-nav .nav-bar > ul > li:last-child > a {
 
     margin-right: 0;
 
-    /* changes made by swarup */
-    /* margin-right: 40px; */
 }
 
 
@@ -2291,7 +2346,7 @@ footer:before {
  /* changes made by swarup */
 
 
-.mobile-menu-toggle {
+/* .mobile-menu-toggle {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -2318,12 +2373,12 @@ footer:before {
 
 .mobile-menu-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
-}
+} */
 
 
 
 
-
+/* changes made by swarup end */
 
 
 
@@ -2670,6 +2725,20 @@ footer:before {
     display: flex;
     align-items: center;
 }
+
+
+
+
+/* changes made here */
+
+
+
+
+
+
+
+
+
 .header-style-one .desktop-nav .nav-bar {
     flex: 1;                /* allow nav-bar to take full space */
     display: flex;          
@@ -2680,6 +2749,20 @@ footer:before {
   display: flex;
   gap: 15px; /* adjust spacing between menu items */
 }
+
+
+
+
+
+
+
+
+/* cjanges ends here */
+
+
+
+
+
 
 .mobile-nav {
     position: fixed;
@@ -2699,16 +2782,6 @@ footer:before {
     background: #000;
     padding-bottom: 0;
 }
-
-
-
-
-
-
-
-
-
-
 .mobile-nav.desktop-menu {
     width: 400px;
     padding: 40px;
@@ -4256,21 +4329,40 @@ figure.est-img {
  header.header-style-one.three {
     top: 10px;
 } 
-header.header-style-one.three:before {
-    content: "";
-    position: absolute;
-    width: 84%;
-    height: 68%;
-    background-color: var(--theme-color);
-    bottom: 0;
-} 
 header.header-style-one.three .theme-btn:hover {
     background-color: #fff;
     color: #000;
 }
 header.header-style-one.three .theme-btn {
     border: 1px solid #fff ; 
+}
+
+
+
+
+
+
+
+/* Changes made by swarup */
+
+
+
+
+
+
+
+header.header-style-one.three:before {
+    display: none !important;
+    /* content: "";
+    position: absolute;
+    width: 84%;
+    height: 68%;
+    background-color: var(--theme-color);
+    bottom: 0; */
 } 
+ 
+
+
 /* header.header-style-one.three .header-logo:before {
     content: "";
     background-color: #fff;
@@ -4280,6 +4372,59 @@ header.header-style-one.three .theme-btn {
     top: -60px;
     left: -12px;
 }  */
+
+header.header-style-one.three .desktop-nav {
+    position: relative;    /* create positioning context for ::before */
+    z-index: 2;
+    background-color: var(--theme-color); /* red */
+    width: 100%;
+}
+header.header-style-one.three .desktop-nav > .container {
+    /* max-width: 100%;
+    padding-left: 0;
+    padding-right: 0; */
+     max-width: 1200px;   /* keep your logo/menu centered in a max width */
+  margin: 0 auto;
+  padding-left: 20px;  /* adjust to match your layout */
+  padding-right: 20px;
+  width: 100%;
+}
+header.header-style-one.three .desktop-nav::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* center the element on the viewport */
+  width: 100vw;                /* full viewport width (works even inside centered containers) */
+  height: 100%;                /* adjust if you want a different height */
+  top: 0;                      /* align with top of .desktop-nav */
+  background: var(--theme-color); /* or use #e30613 */
+  z-index: -1;                 /* push it behind the nav content */
+  pointer-events: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* changes made end */
+
+
+
+
+
+
+
+
+
+
+
+
 header.header-style-one.three .header-logo img {
     position: relative;
     z-index: 1111;
@@ -4619,18 +4764,7 @@ div#countdown ul li {
 
 /* 30. Banner Style One Start */
 .banner-style-one {
-    /* position: relative;
-    width: 100%;
-    height: 100vh; /* full screen like homepage */
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;  */
-
-
-
-
+/* background: black; */
     background: gray;
     padding-top: 215px;
     position: relative;
@@ -4808,9 +4942,6 @@ div#countdown ul li {
 
 /* 36. Contact Form 2 Start */
 
-
-
-
 .contact-form-2 .data span {
     font-size: 16px;
     color: #444;
@@ -4848,9 +4979,6 @@ div#countdown ul li {
     margin-bottom: 15px;
 }
 .contact-form-2 .info {
-
-
-
     background: black;
     padding: 35px 40px 40px;
 }
@@ -6921,6 +7049,21 @@ ul.pd-price li:not(:last-child){
     display: flex;
     justify-content: flex-end;
 }
+
+
+
+
+/* changes ade here */
+
+
+
+
+
+
+
+
+
+
 .timetable-section .timetable-tabs .tab-btns .tab-btn {
     position: relative;
     display: block;
@@ -6947,6 +7090,17 @@ ul.pd-price li:not(:last-child){
     -o-transition: all 500ms ease;
     -moz-transition: all 500ms ease; 
 }
+
+
+
+
+/* changes done */
+
+
+
+
+
+
 
 .timetable-section .timetable-tabs .tab-btns .tab-btn:hover:before,.timetable-section .timetable-tabs .tab-btns .tab-btn.active-btn:before {
     opacity: 1;
