@@ -3672,7 +3672,8 @@ header.header-style-one.three:before {
     }
     .team-style-one .owl-item.open.active {
         width: 7% !important;
-    }
+    }   
+}
 
 
 
@@ -3685,24 +3686,65 @@ header.header-style-one.three:before {
 
 
 
+/* ===========================
+   Center the 3 avatars on top of the map on small screens
+   Add to the END of responsive.css
+   Keeps desktop rules intact; only overrides for <= 767px
+   =========================== */
 
+@media (max-width: 767px) {
+  /* ensure wrapper is a positioning context */
+  .contact-us .c-data {
+    position: relative; /* should already be, but ensure it here */
+  }
 
+  /* Center the whole avatar group horizontally and place vertically over the map */
+  .contact-us .c-data ul {
+    position: absolute !important;     /* keep it floating above the map */
+    left: 50% !important;              /* center horizontally */
+    transform: translateX(-50%) !important;
+    top: 62% !important;               /* <--- Tweak this number to slide avatars up/down */
+    display: flex !important;
+    gap: 14px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 6 !important;             /* ensures avatars appear above the map */
+    width: auto !important;
+  }
 
+  /* Disable per-li absolute offsets from desktop and make them normal sized circles */
+  .contact-us .c-data ul li,
+  .contact-us .c-data ul li a {
+    position: static !important;
+    display: inline-block !important;
+    width: auto !important;
+    height: auto !important;
+  }
 
+  /* Force avatar image size and keep circular look */
+  .contact-us .c-data ul li img {
+    width: 64px !important;    /* mobile avatar size */
+    height: 64px !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    display: block !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+    border: 3px solid #fff !important;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-} 
+  /* If you have check-icons/badges adjust their placement */
+  .contact-us .c-data ul li i.fa-solid {
+    position: absolute !important;
+    right: 6px;
+    bottom: 6px;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.72rem;
+    z-index: 7;
+  }
+}
