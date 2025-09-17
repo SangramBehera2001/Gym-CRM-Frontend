@@ -607,86 +607,102 @@
       </div>
       <div class="modal-body">
         <form id="signupForm">
-          <!-- Full Name -->
+
+
+          <!-- name -->
           <div class="mb-3">
-            <label class="form-label">Full Name</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fas fa-user"></i></span>
-              <input type="text" class="form-control" placeholder="Enter your full name" required>
-            </div>
-          </div>
+    <label class="form-label">Full Name</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="fas fa-user"></i></span>
+      <input id="fullname" name="fullname" type="text" class="form-control" placeholder="Enter your full name" required>
+    </div>
+  </div>
 
-          <!-- Email -->
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-              <input type="email" class="form-control" placeholder="Enter your email" required>
-            </div>
-          </div>
+  <!-- Email -->
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+      <input id="email" name="email" type="email" class="form-control" placeholder="Enter your email" required>
+    </div>
+  </div>
 
-          <!-- Contact Number -->
-          <div class="mb-3">
-            <label class="form-label">Contact Number</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fas fa-phone"></i></span>
-              <input type="tel" class="form-control" placeholder="Enter contact number" required>
-            </div>
-          </div>
+  <!-- Contact Number -->
+  <div class="mb-3">
+    <label class="form-label">Contact Number</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+      <input id="contactNo" name="contactNo" type="tel" class="form-control" placeholder="Enter contact number" required>
+    </div>
+  </div>
 
-          <!-- Gender -->
-          <div class="mb-3">
-            <label class="form-label">Gender</label><br>
-            <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" name="gender" id="male" value="male" checked>
-              <label class="form-check-label" for="male">Male</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" name="gender" id="female" value="female">
-              <label class="form-check-label" for="female">Female</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" name="gender" id="other" value="other">
-              <label class="form-check-label" for="other">Other</label>
-            </div>
-          </div>
+  <!-- Gender -->
+  <div class="mb-3">
+    <label class="form-label">Gender</label><br>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+      <label class="form-check-label" for="male">Male</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+      <label class="form-check-label" for="female">Female</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+      <label class="form-check-label" for="other">Other</label>
+    </div>
+  </div>
 
-          <!-- Membership Type -->
-          <div class="mb-3">
-            <label class="form-labell">Membership Type</label>
-            <select class="form-selectt" required>
-              <option selected disabled>Choose Membership</option>
-              <option>Basic (1 Month)</option>
-              <option>Standard (3 Months)</option>
-              <option>Premium (6 Months)</option>
-              <option>Annual (12 Months)</option>
-            </select>
-          </div>
+  <!-- Membership Type (optional) -->
+  <div class="mb-3">
+    <label class="form-label">Membership Type</label>
+    <select id="membership" name="membership" class="form-selectt" required>
+      <option selected disabled>Choose Membership</option>
+      <option value="basic">Basic (1 Month)</option>
+      <option value="standard">Standard (3 Months)</option>
+      <option value="premium">Premium (6 Months)</option>
+      <option value="annual">Annual (12 Months)</option>
+    </select>
+  </div>
 
-          <!-- Password -->
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fas fa-lock"></i></span>
-              <input type="password" class="form-control" placeholder="Enter password" required>
-              <button type="button" class="input-group-text toggle-password"><i class="fas fa-eye"></i></button>
-            </div>
-            <small class="text-muted">Minimum 8 characters with at least one number and one letter</small>
-          </div>
 
-          <!-- Confirm Password -->
-          <div class="mb-4">
-            <label class="form-label">Confirm Password</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fas fa-lock"></i></span>
-              <input type="password" class="form-control" placeholder="Confirm password" required>
-            </div>
-          </div>
 
-          <!-- Button -->
-          <button type="submit" class="btn btn-theme w-100">
-            <i class="fas fa-user-plus me-2"></i> Create Account
-          </button>
+  <!-- Password -->
+<div class="mb-3">
+  <label class="form-label">Password</label>
+  <div class="input-group">
+    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+    <input id="password" name="password" type="password" class="form-control" placeholder="Enter password" required>
+    <button type="button" class="input-group-text toggle-password"><i class="fas fa-eye"></i></button>
+  </div>
+  <small id="passwordError" class="text-danger"></small>
+  <small class="text-muted">Minimum 8 characters with at least one number and one letter</small>
+</div>
+
+<!-- Confirm Password -->
+<div class="mb-4">
+  <label class="form-label">Confirm Password</label>
+  <div class="input-group">
+    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+    <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm password" required>
+  </div>
+  <small id="confirmPasswordError" class="text-danger"></small>
+</div>
+
+<!-- Server error general -->
+<div class="mb-2">
+  <small id="serverError" class="text-danger"></small>
+  <small id="serverSuccess" class="text-success"></small>
+</div>
+
+<!-- Button (with spinner) -->
+<button id="signupBtn" type="submit" class="btn btn-theme w-100">
+  <span id="signupBtnText"><i class="fas fa-user-plus me-2"></i> Create Account</span>
+  <span id="signupSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+</button>
+
+
+
 
           <!-- Footer -->
           <div class="text-center mt-3">
