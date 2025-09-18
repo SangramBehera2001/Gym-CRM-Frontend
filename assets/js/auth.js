@@ -5,14 +5,6 @@
 
 
 
-
-
-
-
-
-
-
-
 // 1. Signup Modal Authentication
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -150,18 +142,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // toggle password visibility (optional)
-  document.querySelectorAll('.toggle-password').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const input = btn.closest('.input-group').querySelector('input[type="password"], input[type="text"]');
-      if (!input) return;
-      input.type = (input.type === 'password') ? 'text' : 'password';
-      btn.querySelector('i').classList.toggle('fa-eye-slash');
-    });
-  });
+  // document.querySelectorAll('.toggle-password').forEach(btn => {
+  //   btn.addEventListener('click', () => {
+  //     const input = btn.closest('.input-group').querySelector('input[type="password"], input[type="text"]');
+  //     if (!input) return;
+  //     input.type = (input.type === 'password') ? 'text' : 'password';
+  //     btn.querySelector('i').classList.toggle('fa-eye-slash');
+  //   });
+  // });
+
+
+
 });
 
-
 // 1. Signup modal Authentication end
+
+
+
+
+
+
+
+
+
 
 
 // 2. Signin modal Authentication start
@@ -238,21 +241,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Toggle password visibility (uses .toggle-password buttons inside input-group)
-  document.querySelectorAll('.toggle-password').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const input = (btn.closest && btn.closest('.input-group')) 
-        ? btn.closest('.input-group').querySelector('input[type="password"], input[type="text"]') 
-        : passwordInput;
-      if (!input) return;
-      input.type = (input.type === 'password') ? 'text' : 'password';
+  // document.querySelectorAll('.toggle-password').forEach(btn => {
+  //   btn.addEventListener('click', () => {
+  //     const input = (btn.closest && btn.closest('.input-group')) 
+  //       ? btn.closest('.input-group').querySelector('input[type="password"], input[type="text"]') 
+  //       : passwordInput;
+  //     if (!input) return;
+  //     input.type = (input.type === 'password') ? 'text' : 'password';
 
-      const icon = btn.querySelector('i');
-      if (icon) {
-        icon.classList.toggle('fa-eye');
-        icon.classList.toggle('fa-eye-slash');
-      }
-    });
-  });
+  //     const icon = btn.querySelector('i');
+  //     if (icon) {
+  //       icon.classList.toggle('fa-eye');
+  //       icon.classList.toggle('fa-eye-slash');
+  //     }
+  //   });
+  // });
+
+
 
   // Main submit handler
   loginForm.addEventListener('submit', async (e) => {
@@ -360,4 +365,65 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
 });
+
+
+
+
+
+/* Delegated password visibility toggle — add this ONCE at the end of auth.js */
+(function passwordToggleDelegated() {
+  // ensure icons accept clicks (useful if FA inserted svg with pointer-events:none)
+  try {
+    const style = document.createElement('style');
+    style.textContent = `
+      .toggle-password { cursor: pointer; user-select: none; }
+      .toggle-password i, .toggle-password svg { pointer-events: auto; vertical-align: middle; }
+    `;
+    document.head.appendChild(style);
+  } catch (e) { /* ignore if head not present yet */ }
+
+  // Helper to set a predictable <i> icon (so toggling classes is consistent)
+  function setButtonIcon(btn, showText) {
+    const iEl = btn.querySelector('i');
+    if (iEl) {
+      if (showText) {
+        iEl.classList.remove('fa-eye');
+        iEl.classList.add('fa-eye-slash');
+      } else {
+        iEl.classList.remove('fa-eye-slash');
+        iEl.classList.add('fa-eye');
+      }
+      return;
+    }
+    // Replace inner content with <i> if FA kit produced svg (makes subsequent toggling predictable)
+    btn.innerHTML = showText ? '<i class="fas fa-eye-slash" aria-hidden="true"></i>' : '<i class="fas fa-eye" aria-hidden="true"></i>';
+  }
+
+  // Delegated click handler (works for dynamic content & after FA swaps nodes)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest ? e.target.closest('.toggle-password') : null;
+    if (!btn) return;
+
+    // prevent default in case it's inside an <a> or similar
+    e.preventDefault();
+
+    const group = btn.closest('.input-group');
+    if (!group) return;
+    const input = group.querySelector('input[type="password"], input[type="text"]');
+    if (!input) return;
+
+    const willShowText = input.type === 'password';
+    input.type = willShowText ? 'text' : 'password';
+
+    setButtonIcon(btn, willShowText);
+
+    // focus input so typing continues smoothly
+    try { input.focus(); } catch (err) { /* ignore */ }
+
+    // accessibility labels
+    btn.setAttribute('aria-pressed', String(willShowText));
+    btn.setAttribute('aria-label', willShowText ? 'Hide password' : 'Show password');
+  }, { passive: false });
+})();
+
 
