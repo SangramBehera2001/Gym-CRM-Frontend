@@ -721,57 +721,64 @@
      SIGN IN MODAL
 ======================= -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content signin-modal">
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">SIGN IN</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="loginForm">
-          <!-- Email -->
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-              <input type="email" class="form-control" placeholder="Enter your email" required>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content signin-modal">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">SIGN IN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="loginForm" novalidate>
+            <!-- Error message -->
+            <div id="loginError" class="alert alert-danger d-none" role="alert"></div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label" for="loginEmail">Email</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <input id="loginEmail" name="email" type="email" class="form-control" placeholder="Enter your email" required>
+              </div>
             </div>
-          </div>
 
-          <!-- Password -->
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <div class="input-group">
-              <span class="input-group-text"><i class="fas fa-lock"></i></span>
-              <input type="password" class="form-control" placeholder="Enter password" required>
-              <button type="button" class="input-group-text toggle-password"><i class="fas fa-eye"></i></button>
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label" for="loginPassword">Password</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                <input id="loginPassword" name="password" type="password" class="form-control" placeholder="Enter password" required>
+                <button type="button" class="input-group-text toggle-password" aria-label="Toggle password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
             </div>
-          </div>
 
-          <!-- Remember + Forgot -->
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="rememberMe">
-              <label class="form-check-label" for="rememberMe">Remember me</label>
+            <!-- Remember + Forgot -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+              </div>
+              <a href="#" class="small text-danger">Forgot password?</a>
             </div>
-            <a href="#" class="small text-danger">Forgot password?</a>
-          </div>
 
-          <!-- Button -->
-          <button type="submit" class="btn btn-theme w-100">
-            <i class="fas fa-sign-in-alt me-2"></i> Sign In
-          </button>
+            <!-- Button -->
+            <button id="loginSubmitBtn" type="submit" class="btn btn-theme w-100">
+              <i class="fas fa-sign-in-alt me-2"></i> Sign In
+            </button>
 
-          <!-- Footer -->
-          <div class="text-center mt-3">
-            Don’t have an account? 
-            <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign Up now</a>
-          </div>
-        </form>
+            <!-- Footer -->
+            <div class="text-center mt-3">
+              Don’t have an account?
+              <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign Up now</a>
+            </div>
+          </form>
+        </div>
+
       </div>
     </div>
   </div>
-</div>
 
   <!-- Jquery -->
   <script src="assets/js/jquery.min.js"></script>
@@ -789,6 +796,8 @@
   <script src="assets/js/owl.carousel.min.js"></script>
   <!-- Custom Js -->
   <script src="assets/js/custom.js"></script>
+  <!-- auth js -->
+  <script src="assets/js/auth.js"></script>
   
 </body>
 

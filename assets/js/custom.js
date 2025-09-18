@@ -590,150 +590,150 @@ $(document).ready(function() {
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const signupForm = document.getElementById('signupForm');
-  const signupBtn = document.getElementById('signupBtn');
-  const signupBtnText = document.getElementById('signupBtnText');
-  const signupSpinner = document.getElementById('signupSpinner');
+// document.addEventListener('DOMContentLoaded', () => {
+//   const signupForm = document.getElementById('signupForm');
+//   const signupBtn = document.getElementById('signupBtn');
+//   const signupBtnText = document.getElementById('signupBtnText');
+//   const signupSpinner = document.getElementById('signupSpinner');
 
-  const passwordError = document.getElementById('passwordError');
-  const confirmPasswordError = document.getElementById('confirmPasswordError');
-  const serverError = document.getElementById('serverError');
-  const serverSuccess = document.getElementById('serverSuccess');
+//   const passwordError = document.getElementById('passwordError');
+//   const confirmPasswordError = document.getElementById('confirmPasswordError');
+//   const serverError = document.getElementById('serverError');
+//   const serverSuccess = document.getElementById('serverSuccess');
 
-  function clearErrors() {
-    passwordError.textContent = '';
-    confirmPasswordError.textContent = '';
-    serverError.textContent = '';
-    serverSuccess.textContent = '';
-  }
+//   function clearErrors() {
+//     passwordError.textContent = '';
+//     confirmPasswordError.textContent = '';
+//     serverError.textContent = '';
+//     serverSuccess.textContent = '';
+//   }
 
-  function setLoading(on) {
-    if (on) {
-      signupBtn.setAttribute('disabled', 'disabled');
-      signupSpinner.classList.remove('d-none');
-    } else {
-      signupBtn.removeAttribute('disabled');
-      signupSpinner.classList.add('d-none');
-    }
-  }
+//   function setLoading(on) {
+//     if (on) {
+//       signupBtn.setAttribute('disabled', 'disabled');
+//       signupSpinner.classList.remove('d-none');
+//     } else {
+//       signupBtn.removeAttribute('disabled');
+//       signupSpinner.classList.add('d-none');
+//     }
+//   }
 
-  signupForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    clearErrors();
+//   signupForm.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+//     clearErrors();
 
-    // gather values
-    const fullname = document.getElementById('fullname').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const contactNo = document.getElementById('contactNo').value.trim();
-    const genderInput = signupForm.querySelector('input[name="gender"]:checked');
-    const gender = genderInput ? genderInput.value : null;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const membershipSelect = document.getElementById('membership');
-    const membership = membershipSelect ? membershipSelect.value : null;
+//     // gather values
+//     const fullname = document.getElementById('fullname').value.trim();
+//     const email = document.getElementById('email').value.trim();
+//     const contactNo = document.getElementById('contactNo').value.trim();
+//     const genderInput = signupForm.querySelector('input[name="gender"]:checked');
+//     const gender = genderInput ? genderInput.value : null;
+//     const password = document.getElementById('password').value;
+//     const confirmPassword = document.getElementById('confirmPassword').value;
+//     const membershipSelect = document.getElementById('membership');
+//     const membership = membershipSelect ? membershipSelect.value : null;
 
-    // client-side checks (UX only)
-    let hasError = false;
-    if (password !== confirmPassword) {
-      confirmPasswordError.textContent = 'Passwords do not match.';
-      hasError = true;
-    }
-    if (password.length < 8) {
-      passwordError.textContent = 'Password must be at least 8 characters.';
-      hasError = true;
-    }
-    if (!email) {
-      serverError.textContent = 'Email is required.'; // alternatively show under email input by adding placeholder
-      hasError = true;
-    }
-    if (!membership) {
-      serverError.textContent = 'Please choose a membership.';
-      hasError = true;
-    }
-    if (hasError) return;
+//     // client-side checks (UX only)
+//     let hasError = false;
+//     if (password !== confirmPassword) {
+//       confirmPasswordError.textContent = 'Passwords do not match.';
+//       hasError = true;
+//     }
+//     if (password.length < 8) {
+//       passwordError.textContent = 'Password must be at least 8 characters.';
+//       hasError = true;
+//     }
+//     if (!email) {
+//       serverError.textContent = 'Email is required.'; // alternatively show under email input by adding placeholder
+//       hasError = true;
+//     }
+//     if (!membership) {
+//       serverError.textContent = 'Please choose a membership.';
+//       hasError = true;
+//     }
+//     if (hasError) return;
 
-    const payload = { fullname, email, contactNo, gender, membership, password };
+//     const payload = { fullname, email, contactNo, gender, membership, password };
 
-    setLoading(true);
+//     setLoading(true);
 
-    try {
-      const response = await fetch('http://localhost:8081/api/user/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload),
-        credentials: 'include' // include cookies if backend sets httpOnly cookie
-      });
+//     try {
+//       const response = await fetch('http://localhost:8081/api/auth/register', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(payload),
+//         credentials: 'include' // include cookies if backend sets httpOnly cookie
+//       });
 
-      // parse JSON if possible
-      const text = await response.text();
-      let data = null;
-      try { data = text ? JSON.parse(text) : null; } catch (err) { data = null; }
+//       // parse JSON if possible
+//       const text = await response.text();
+//       let data = null;
+//       try { data = text ? JSON.parse(text) : null; } catch (err) { data = null; }
 
-      if (!response.ok) {
-        // handle common error shapes:
-        // 1) { message: "..." }
-        // 2) { errors: { field1: "msg", field2: "msg" } }
-        if (data) {
-          if (data.errors && typeof data.errors === 'object') {
-            // map field errors to inputs (best-effort)
-            if (data.errors.password) passwordError.textContent = data.errors.password;
-            if (data.errors.confirmPassword) confirmPasswordError.textContent = data.errors.confirmPassword;
-            if (data.errors.email) serverError.textContent = data.errors.email;
-            // fallback general message
-            if (data.message) serverError.textContent = data.message;
-          } else if (data.message) {
-            serverError.textContent = data.message;
-          } else {
-            serverError.textContent = `Registration failed: ${response.status}`;
-          }
-        } else {
-          serverError.textContent = `Registration failed: ${response.status}`;
-        }
-        setLoading(false);
-        return;
-      }
+//       if (!response.ok) {
+//         // handle common error shapes:
+//         // 1) { message: "..." }
+//         // 2) { errors: { field1: "msg", field2: "msg" } }
+//         if (data) {
+//           if (data.errors && typeof data.errors === 'object') {
+//             // map field errors to inputs (best-effort)
+//             if (data.errors.password) passwordError.textContent = data.errors.password;
+//             if (data.errors.confirmPassword) confirmPasswordError.textContent = data.errors.confirmPassword;
+//             if (data.errors.email) serverError.textContent = data.errors.email;
+//             // fallback general message
+//             if (data.message) serverError.textContent = data.message;
+//           } else if (data.message) {
+//             serverError.textContent = data.message;
+//           } else {
+//             serverError.textContent = `Registration failed: ${response.status}`;
+//           }
+//         } else {
+//           serverError.textContent = `Registration failed: ${response.status}`;
+//         }
+//         setLoading(false);
+//         return;
+//       }
 
-      // success
-      // data may contain { token: "...", message: "..." } OR the backend may set an httpOnly cookie
-      if (data && data.token) {
-        try {
-          // fallback: store token if backend returns it (not ideal for security)
-          localStorage.setItem('token', data.token);
-        } catch (e) { /* ignore storage errors */ }
-      }
+//       // success
+//       // data may contain { token: "...", message: "..." } OR the backend may set an httpOnly cookie
+//       if (data && data.token) {
+//         try {
+//           // fallback: store token if backend returns it (not ideal for security)
+//           localStorage.setItem('token', data.token);
+//         } catch (e) { /* ignore storage errors */ }
+//       }
 
-      serverSuccess.textContent = (data && data.message) ? data.message : 'Registration successful';
+//       serverSuccess.textContent = (data && data.message) ? data.message : 'Registration successful';
 
-      // close modal after short delay so user sees success text (optional)
-      setTimeout(() => {
-        const modalEl = document.getElementById('signupModal');
-        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-        modal.hide();
-        // optional: redirect to dashboard or refresh
-        // window.location.href = '/dashboard';
-      }, 700);
+//       // close modal after short delay so user sees success text (optional)
+//       setTimeout(() => {
+//         const modalEl = document.getElementById('signupModal');
+//         const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+//         modal.hide();
+//         // optional: redirect to dashboard or refresh
+//         // window.location.href = '/dashboard';
+//       }, 700);
 
-    } catch (err) {
-      console.error('Network error', err);
-      serverError.textContent = 'Network error. Please try again later.';
-    } finally {
-      setLoading(false);
-    }
-  });
+//     } catch (err) {
+//       console.error('Network error', err);
+//       serverError.textContent = 'Network error. Please try again later.';
+//     } finally {
+//       setLoading(false);
+//     }
+//   });
 
-  // toggle password visibility (optional)
-  document.querySelectorAll('.toggle-password').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const input = btn.closest('.input-group').querySelector('input[type="password"], input[type="text"]');
-      if (!input) return;
-      input.type = (input.type === 'password') ? 'text' : 'password';
-      btn.querySelector('i').classList.toggle('fa-eye-slash');
-    });
-  });
-});
+//   // toggle password visibility (optional)
+//   document.querySelectorAll('.toggle-password').forEach(btn => {
+//     btn.addEventListener('click', () => {
+//       const input = btn.closest('.input-group').querySelector('input[type="password"], input[type="text"]');
+//       if (!input) return;
+//       input.type = (input.type === 'password') ? 'text' : 'password';
+//       btn.querySelector('i').classList.toggle('fa-eye-slash');
+//     });
+//   });
+// });
 
 
 
