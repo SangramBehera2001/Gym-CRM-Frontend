@@ -366,64 +366,201 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// 2. Signin modal Authentication end
 
 
 
 
-/* Delegated password visibility toggle — add this ONCE at the end of auth.js */
-(function passwordToggleDelegated() {
-  // ensure icons accept clicks (useful if FA inserted svg with pointer-events:none)
-  try {
-    const style = document.createElement('style');
-    style.textContent = `
-      .toggle-password { cursor: pointer; user-select: none; }
-      .toggle-password i, .toggle-password svg { pointer-events: auto; vertical-align: middle; }
-    `;
-    document.head.appendChild(style);
-  } catch (e) { /* ignore if head not present yet */ }
+// /* Delegated password visibility toggle — add this ONCE at the end of auth.js */
+// (function passwordToggleDelegated() {
+//   // ensure icons accept clicks (useful if FA inserted svg with pointer-events:none)
+//   try {
+//     const style = document.createElement('style');
+//     style.textContent = `
+//       .toggle-password { cursor: pointer; user-select: none; }
+//       .toggle-password i, .toggle-password svg { pointer-events: auto; vertical-align: middle; }
+//     `;
+//     document.head.appendChild(style);
+//   } catch (e) { /* ignore if head not present yet */ }
 
-  // Helper to set a predictable <i> icon (so toggling classes is consistent)
-  function setButtonIcon(btn, showText) {
-    const iEl = btn.querySelector('i');
-    if (iEl) {
-      if (showText) {
-        iEl.classList.remove('fa-eye');
-        iEl.classList.add('fa-eye-slash');
-      } else {
-        iEl.classList.remove('fa-eye-slash');
-        iEl.classList.add('fa-eye');
-      }
-      return;
-    }
-    // Replace inner content with <i> if FA kit produced svg (makes subsequent toggling predictable)
-    btn.innerHTML = showText ? '<i class="fas fa-eye-slash" aria-hidden="true"></i>' : '<i class="fas fa-eye" aria-hidden="true"></i>';
+//   // Helper to set a predictable <i> icon (so toggling classes is consistent)
+//   function setButtonIcon(btn, showText) {
+//     const iEl = btn.querySelector('i');
+//     if (iEl) {
+//       if (showText) {
+//         iEl.classList.remove('fa-eye');
+//         iEl.classList.add('fa-eye-slash');
+//       } else {
+//         iEl.classList.remove('fa-eye-slash');
+//         iEl.classList.add('fa-eye');
+//       }
+//       return;
+//     }
+//     // Replace inner content with <i> if FA kit produced svg (makes subsequent toggling predictable)
+//     btn.innerHTML = showText ? '<i class="fas fa-eye-slash" aria-hidden="true"></i>' : '<i class="fas fa-eye" aria-hidden="true"></i>';
+//   }
+
+//   // Delegated click handler (works for dynamic content & after FA swaps nodes)
+//   document.addEventListener('click', (e) => {
+//     const btn = e.target.closest ? e.target.closest('.toggle-password') : null;
+//     if (!btn) return;
+
+//     // prevent default in case it's inside an <a> or similar
+//     e.preventDefault();
+
+//     const group = btn.closest('.input-group');
+//     if (!group) return;
+//     const input = group.querySelector('input[type="password"], input[type="text"]');
+//     if (!input) return;
+
+//     const willShowText = input.type === 'password';
+//     input.type = willShowText ? 'text' : 'password';
+
+//     setButtonIcon(btn, willShowText);
+
+//     // focus input so typing continues smoothly
+//     try { input.focus(); } catch (err) { /* ignore */ }
+
+//     // accessibility labels
+//     btn.setAttribute('aria-pressed', String(willShowText));
+//     btn.setAttribute('aria-label', willShowText ? 'Hide password' : 'Show password');
+//   }, { passive: false });
+// })();
+
+
+
+
+// 3. signout modal authentication start
+
+// dashboard-logout.js
+document.addEventListener('DOMContentLoaded', () => {
+  const modalOverlay = document.getElementById('modal-overlay');
+  const confirmBtn = document.getElementById('confirm-logout');
+  const cancelBtn = document.getElementById('cancel-logout');
+  const logoutMessageEl = document.getElementById('logoutMessage'); // optional message area
+  const logoutSpinner = document.getElementById('logoutSpinner'); // optional spinner inside button
+  const logoutBtnText = document.getElementById('logoutBtnText'); // optional button text span
+
+  if (!modalOverlay || !confirmBtn || !cancelBtn) {
+    console.warn('Logout modal elements not found. Aborting logout wiring.');
+    return;
   }
 
-  // Delegated click handler (works for dynamic content & after FA swaps nodes)
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest ? e.target.closest('.toggle-password') : null;
-    if (!btn) return;
+  // Set your backend origin here (change if backend port is different)
+  const BACKEND_ORIGIN = 'http://localhost:8081'; // <-- change if needed
+  const LOGOUT_URL = `${BACKEND_ORIGIN}/api/auth/logout`;
 
-    // prevent default in case it's inside an <a> or similar
+  function showMessage(text, type = 'error') {
+    if (logoutMessageEl) {
+      logoutMessageEl.textContent = text;
+      logoutMessageEl.style.color = (type === 'error') ? '#b00020' : '#0a8a0a';
+    } else {
+      // fallback: temporarily alert
+      console[type === 'error' ? 'warn' : 'log'](text);
+    }
+  }
+
+  function clearClientAuth() {
+    try {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userFullname');
+      localStorage.removeItem('userRole');
+      // keep rememberEmail if you want; otherwise remove:
+      // localStorage.removeItem('rememberEmail');
+    } catch (err) {
+      console.warn('Error clearing localStorage', err);
+    }
+    // note: httpOnly cookies cannot be removed from JS — server clears them (your controller does)
+  }
+
+  function setBtnLoading(on) {
+    if (on) {
+      confirmBtn.setAttribute('disabled', 'disabled');
+      if (logoutSpinner) logoutSpinner.classList.remove('d-none');
+      if (logoutBtnText) logoutBtnText.classList.add('visually-hidden');
+      else {
+        confirmBtn._origHtml = confirmBtn._origHtml || confirmBtn.innerHTML;
+        confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Logging out...';
+      }
+    } else {
+      confirmBtn.removeAttribute('disabled');
+      if (logoutSpinner) logoutSpinner.classList.add('d-none');
+      if (logoutBtnText) logoutBtnText.classList.remove('visually-hidden');
+      else if (confirmBtn._origHtml) confirmBtn.innerHTML = confirmBtn._origHtml;
+    }
+  }
+
+  // Confirm logout flow
+  confirmBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+    showMessage(''); // clear previous
+    setBtnLoading(true);
 
-    const group = btn.closest('.input-group');
-    if (!group) return;
-    const input = group.querySelector('input[type="password"], input[type="text"]');
-    if (!input) return;
+    const token = (() => {
+      try { return localStorage.getItem('authToken'); } catch (err) { return null; }
+    })();
 
-    const willShowText = input.type === 'password';
-    input.type = willShowText ? 'text' : 'password';
+    // If no token present: just clear and redirect to index
+    if (!token) {
+      clearClientAuth();
+      // hide modal overlay
+      try { modalOverlay.style.display = 'none'; } catch (err) {}
+      // immediate redirect to index page
+      window.location.replace('index.html');
+      return;
+    }
 
-    setButtonIcon(btn, willShowText);
+    try {
+      const resp = await fetch(LOGOUT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        // If your backend expects cookies (httpOnly), enable credentials and ensure CORS allowCredentials(true)
+        credentials: 'include'
+      });
 
-    // focus input so typing continues smoothly
-    try { input.focus(); } catch (err) { /* ignore */ }
+      // read text for debugging, but main flow checks resp.ok
+      const bodyText = await resp.text();
 
-    // accessibility labels
-    btn.setAttribute('aria-pressed', String(willShowText));
-    btn.setAttribute('aria-label', willShowText ? 'Hide password' : 'Show password');
-  }, { passive: false });
-})();
+      if (!resp.ok) {
+        showMessage(`Logout failed: ${resp.status} ${resp.statusText}`, 'error');
+        console.warn('Logout response body:', bodyText);
+        return;
+      }
 
+      // success -> clear client state
+      clearClientAuth();
+
+      // hide modal (your UI may handle this differently)
+      try { modalOverlay.style.display = 'none'; } catch (err) {}
+
+      // redirect to index page
+      // use replace so that back button doesn't return to a protected page
+      window.location.replace('index.html');
+
+    } catch (err) {
+      console.error('Network/logout error', err);
+      showMessage('Network error during logout. Please try again.', 'error');
+    } finally {
+      setBtnLoading(false);
+    }
+  });
+
+  // Cancel: hide overlay
+  cancelBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    try { modalOverlay.style.display = 'none'; } catch (err) { console.warn(err); }
+  });
+
+  // Optional: close button (if present)
+  const closeBtn = document.getElementById('close-logout');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      try { modalOverlay.style.display = 'none'; } catch (err) {}
+    });
+  }
+});
 
